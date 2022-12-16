@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+if yarn run format; then
+     echo "✅  Code is formatted."
+else
+     echo "❌  Code is not formatted. And maybe you need this command  ⚠️ ⚠️ ⚠️  git add . ⚠️ ⚠️ ⚠️"
+     exit 1
+fi
+
+
+if yarn validate --fix; then
+     echo "✅  Code is valid."
+else
+     echo "❌  Code is invalid. And maybe you need this command ⚠️ ⚠️ ⚠️  git add . ⚠️ ⚠️ ⚠️"
+     exit 1
+fi
+
+if yarn test; then
+     echo "✅  Code is tested successfully."
+else
+     echo "❌  Code didn't tested successfully."
+     exit 1
+fi
